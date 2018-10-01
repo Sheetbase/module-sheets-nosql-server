@@ -1,0 +1,35 @@
+{
+	"name": "@sheetbase/sheets-nosql-server",
+	"type": "module",
+	"version": "0.0.1",
+	"description": "Using Google Sheets as NoSQL database.",
+	"author": "Sheetbase",
+	"homepage": "https://sheetbase.net",
+	"license": "MIT",
+	"keywords": [
+		"google-apps-script",
+		"sheets",
+		"sheetbase",
+		"database",
+		"nosql"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/sheetbase/module-sheets-nosql-server.git"
+	},
+	"bugs": {
+		"url": "https://github.com/sheetbase/module-sheets-nosql-server/issues"
+	},
+	"dependencies": {
+		"@sheetbase/lodash-server": "4.17.11",
+		"@sheetbase/tamotsux-server": "0.0.1",
+		"@sheetbase/utils-server": "0.0.2"
+	},
+	"peerDependencies": {
+		"@sheetbase/core-server": "0.0.2"
+	},
+	"devDependencies": {
+		"@types/google-apps-script": "0.0.28",
+		"@types/lodash": "^4.14.116"
+	}
+}

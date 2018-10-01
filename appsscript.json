@@ -1,0 +1,32 @@
+{
+  "timeZone": "Asia/Bangkok",
+  "dependencies": {
+	"libraries": [
+		{
+		  "userSymbol": "Sheetbase",
+		  "libraryId": "1bhE_YkXnzZLr9hZk_5NXgCY6bAe73UHIGjM4dvyRJLLTyccpu5vS6jeJ",
+		  "version": "2"
+		},
+		{
+		  "userSymbol": "Tamotsux",
+		  "libraryId": "15fzNG5GZ7Ko6ygGYsMvthZLHovrc3eI_BEwFhwciOWVsBx47WCo13wvW",
+		  "version": "1"
+		},
+		{
+		  "userSymbol": "_",
+		  "libraryId": "1P8qfUHEUdQPB0Pc8S7Vb_7MvUnxU8Mt7GtLNd7QMuqup4KamkavaN5YT",
+		  "version": "1"
+		},
+		{
+		  "userSymbol": "Utils",
+		  "libraryId": "1DvgE7s0BRsgiI8uVvnx3OaIVHVYskgA0CaF0ykKPDa-IVl6csneLQQxT",
+		  "version": "2"
+		}
+	]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+	"https://www.googleapis.com/auth/script.scriptapp",
+	"https://www.googleapis.com/auth/spreadsheets"
+  ]
+}
