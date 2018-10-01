@@ -10,10 +10,13 @@ export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
     },
     'data/no-updates': {
         status: 400, message: 'Missing "updates" in body.',
+    },
+    'data/unknown': {
+        status: 400, message: 'Unknown errors.',
     }
 };
 
-export function sheetsNosqlRegisterRoutes(Sheetbase: ISheetbaseModule, SheetsNosql: ISheetsNosqlModule) {
+export function sheetsNosqlModuleRoutes(Sheetbase: ISheetbaseModule, SheetsNosql: ISheetsNosqlModule): void {
     Sheetbase.Router.get('/data', (req, res) => {
         const path: string = req.queries.path;
         const type: string = req.queries.type;

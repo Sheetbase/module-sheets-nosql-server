@@ -12,4 +12,3 @@ const require = require || (() => {return {}});
  */
 
 export * from './src/types/module';
-export * from './src/types/data';

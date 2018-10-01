@@ -11,10 +11,8 @@ Using Google Sheets as NoSQL database.
 ## Usage
 
 ```ts
-// to register module routes
-SheetsNosql.init({
-	exposeRoutes: true
-});
+// to expose module routes, see endpoints
+SheetsNosql.registerRoutes();
 
 // get data as list of object
 SheetsNosql.list('/foo');
@@ -23,7 +21,14 @@ SheetsNosql.collection('foo');
 // get data as object
 SheetsNosql.object('/foo/foo-1');
 SheetsNosql.doc('foo', 'foo-1');
+
+// set/update data
+SheetsNosql.update({
+	'/foo/foo-2/content': 'New content for foo-2.'
+});
 ```
+
+Module endpoints:
 
 ```http
 # get data

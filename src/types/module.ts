@@ -1,8 +1,8 @@
-import { ISheetsNosqlModuleConfigs } from './data';
-
 export interface ISheetsNosqlModule {
-    init: {(configs: ISheetsNosqlModuleConfigs): void};
+    registerRoutes: {(): void};
     object: {(path: string)};
     list: {(path: string): any[]};
+    doc: {(collectionId: string, docId: string)};
+    collection: {(collectionId: string): any[]};
     update: {(updates: {[key: string]: any}): boolean};
 }
