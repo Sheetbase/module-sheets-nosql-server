@@ -1,7 +1,7 @@
 {
 	"name": "@sheetbase/sheets-nosql-server",
 	"type": "module",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Using Google Sheets as NoSQL database.",
 	"author": "Sheetbase",
 	"homepage": "https://sheetbase.net",
@@ -29,7 +29,6 @@
 		"@sheetbase/core-server": "0.0.2"
 	},
 	"devDependencies": {
-		"@types/google-apps-script": "0.0.28",
-		"@types/lodash": "^4.14.116"
+		"@types/google-apps-script": "0.0.28"
 	}
 }

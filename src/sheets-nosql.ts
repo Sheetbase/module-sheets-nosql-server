@@ -1,4 +1,4 @@
-import { ISheetbaseModule } from '@sheetbase/core-server';
+import { ISheetbaseModule, IAddonRoutesOptions } from '@sheetbase/core-server';
 import { ITamotsuxModule } from '@sheetbase/tamotsux-server';
 import { IUtilsModule } from '@sheetbase/utils-server';
 import { ISheetsNosqlModule, ISheetsNosqlModuleRoutes } from './types/module';
@@ -17,8 +17,8 @@ export function sheetsNosqlModuleExports(): ISheetsNosqlModule {
 
         constructor() {}
 
-        registerRoutes(customEndpointName: string = null): void {
-            sheetsNosqlModuleRoutes(Sheetbase, this, customEndpointName);
+        registerRoutes(options: IAddonRoutesOptions = null): void {
+            sheetsNosqlModuleRoutes(Sheetbase, this, options);
         }
 
         object(path: string) {

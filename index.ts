@@ -3,7 +3,7 @@ const require = require || (() => {return {}});
  * 
  * Name: @sheetbase/sheets-nosql-server
  * Description: Using Google Sheets as NoSQL database.
- * Version: 0.0.2
+ * Version: 0.0.3
  * Author: Sheetbase
  * Homepage: https://sheetbase.net
  * License: MIT

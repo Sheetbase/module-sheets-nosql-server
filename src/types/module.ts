@@ -1,7 +1,7 @@
-import { ISheetbaseModule } from '@sheetbase/core-server';
+import { ISheetbaseModule, IAddonRoutesOptions } from '@sheetbase/core-server';
 
 export interface ISheetsNosqlModule {
-    registerRoutes: {(customEndpointName?: string): void};
+    registerRoutes: {(options?: IAddonRoutesOptions): void};
     object: {(path: string)};
     list: {(path: string): any[]};
     doc: {(collectionId: string, docId: string)};
@@ -13,6 +13,6 @@ export interface ISheetsNosqlModuleRoutes {
     (
         Sheetbase: ISheetbaseModule,
         SheetsNosql: ISheetsNosqlModule,
-        customEndpointName?: string
+        options?: IAddonRoutesOptions
     ): void;
 }

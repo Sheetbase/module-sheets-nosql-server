@@ -1,7 +1,10 @@
-import { ISheetbaseModule, IRoutingErrors } from '@sheetbase/core-server';
+import { ISheetbaseModule, IRoutingErrors, IAddonRoutesOptions, IHttpHandler } from '@sheetbase/core-server';
 import { ISheetsNosqlModule } from './types/module';
 
 export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
+    'data/unknown': {
+        status: 400, message: 'Unknown errors.',
+    },
     'data/no-path': {
         status: 400, message: 'Missing "path" in query.',
     },
@@ -10,18 +13,20 @@ export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
     },
     'data/no-updates': {
         status: 400, message: 'Missing "updates" in body.',
-    },
-    'data/unknown': {
-        status: 400, message: 'Unknown errors.',
     }
 };
 
 export function sheetsNosqlModuleRoutes(
     Sheetbase: ISheetbaseModule,
     SheetsNosql: ISheetsNosqlModule,
-    customEndpointName: string = 'data'
+    options: IAddonRoutesOptions
 ): void {
-    Sheetbase.Router.get('/' + customEndpointName, (req, res) => {
+    const customName: string = options.customName || 'data';
+    const middlewares: IHttpHandler[] = options.middlewares || ([
+        (req, res, next) => next()
+    ]);
+
+    Sheetbase.Router.get('/' + customName, ... middlewares, (req, res) => {
         const path: string = req.queries.path;
         const type: string = req.queries.type;
         let data: any[] | {[key: string]: any};
@@ -38,7 +43,7 @@ export function sheetsNosqlModuleRoutes(
         return res.success(data);
     });
 
-    Sheetbase.Router.post('/' + customEndpointName, (req, res) => {
+    Sheetbase.Router.post('/' + customName, ... middlewares, (req, res) => {
         const updates: {[key: string]: any} = req.body.updates;
         try {
             SheetsNosql.update(updates);
