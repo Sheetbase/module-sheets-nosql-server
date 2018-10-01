@@ -6,7 +6,7 @@ Using Google Sheets as NoSQL database.
 
 - NPM: ``$ npm install --save @sheetbase/sheets-nosql-server``
 
-- As library: ``1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb`` (set Indentifier to **Sheetbase**, [view code](https://script.google.com/d/1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb/edit?usp=sharing))
+- As library: ``1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb`` (set Indentifier to **SheetsNosql**, [view code](https://script.google.com/d/1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb/edit?usp=sharing))
 
 ## Usage
 
@@ -19,11 +19,11 @@ Error | Success (Object | Array)
 # update data
 POST: <web_app_url>?e=/data
 
-{
-	updates: {[keys: string]: any}
-}
+#{
+#	updates: {[keys: string]: any}
+#}
 
-Error | Success ({updated: true})
+Error | Success ({"updated": true})
 ```
 
 ## License
