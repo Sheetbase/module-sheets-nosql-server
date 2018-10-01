@@ -16,8 +16,12 @@ export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
     }
 };
 
-export function sheetsNosqlModuleRoutes(Sheetbase: ISheetbaseModule, SheetsNosql: ISheetsNosqlModule): void {
-    Sheetbase.Router.get('/data', (req, res) => {
+export function sheetsNosqlModuleRoutes(
+    Sheetbase: ISheetbaseModule,
+    SheetsNosql: ISheetsNosqlModule,
+    customEndpointName: string = 'data'
+): void {
+    Sheetbase.Router.get('/' + customEndpointName, (req, res) => {
         const path: string = req.queries.path;
         const type: string = req.queries.type;
         let data: any[] | {[key: string]: any};
@@ -34,7 +38,7 @@ export function sheetsNosqlModuleRoutes(Sheetbase: ISheetbaseModule, SheetsNosql
         return res.success(data);
     });
 
-    Sheetbase.Router.post('/data', (req, res) => {
+    Sheetbase.Router.post('/' + customEndpointName, (req, res) => {
         const updates: {[key: string]: any} = req.body.updates;
         try {
             SheetsNosql.update(updates);

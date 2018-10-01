@@ -1,14 +1,14 @@
 import { ISheetbaseModule } from '@sheetbase/core-server';
 import { ITamotsuxModule } from '@sheetbase/tamotsux-server';
 import { IUtilsModule } from '@sheetbase/utils-server';
-import { ISheetsNosqlModule } from './types/module';
+import { ISheetsNosqlModule, ISheetsNosqlModuleRoutes } from './types/module';
 
 declare const Sheetbase: ISheetbaseModule;
 declare const Tamotsux: ITamotsuxModule;
 declare const Utils: IUtilsModule;
 declare const _;
 
-declare const sheetsNosqlModuleRoutes: {(Sheetbase: ISheetbaseModule, SheetsNosql: ISheetsNosqlModule): void};
+declare const sheetsNosqlModuleRoutes: ISheetsNosqlModuleRoutes;
 
 export function sheetsNosqlModuleExports(): ISheetsNosqlModule {
 
@@ -17,8 +17,8 @@ export function sheetsNosqlModuleExports(): ISheetsNosqlModule {
 
         constructor() {}
 
-        registerRoutes(): void {
-            sheetsNosqlModuleRoutes(Sheetbase, this);
+        registerRoutes(customEndpointName: string = null): void {
+            sheetsNosqlModuleRoutes(Sheetbase, this, customEndpointName);
         }
 
         object(path: string) {
