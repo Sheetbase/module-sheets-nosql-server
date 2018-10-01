@@ -10,6 +10,21 @@ Using Google Sheets as NoSQL database.
 
 ## Usage
 
+```ts
+// to register module routes
+SheetsNosql.init({
+	exposeRoutes: true
+});
+
+// get data as list of object
+SheetsNosql.list('/foo');
+SheetsNosql.collection('foo');
+
+// get data as object
+SheetsNosql.object('/foo/foo-1');
+SheetsNosql.doc('foo', 'foo-1');
+```
+
 ```http
 # get data
 GET <web_app_url>?e=/data&path=/path/to/data[&type=object|list]
@@ -17,11 +32,11 @@ GET <web_app_url>?e=/data&path=/path/to/data[&type=object|list]
 Error | Success (Object | Array)
 
 # update data
-POST: <web_app_url>?e=/data
+POST <web_app_url>?e=/data
 
-#{
-#	updates: {[keys: string]: any}
-#}
+{
+	"updates": Object
+}
 
 Error | Success ({"updated": true})
 ```
