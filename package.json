@@ -1,11 +1,18 @@
 {
 	"name": "@sheetbase/sheets-nosql-server",
 	"type": "module",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Using Google Sheets as NoSQL database.",
 	"author": "Sheetbase",
 	"homepage": "https://sheetbase.net",
 	"license": "MIT",
+	"scripts": {
+		"build:code": "sheetbase-app-scripts build",
+		"build:readme": "sheetbase-app-scripts readme",
+		"build:docs": "typedoc ./src --out ./docs --mode file --target ES6 --excludeExternals --excludeNotExported --ignoreCompilerErrors",
+		"build": "npm run build:code && npm run build:readme && npm run build:docs",
+		"push": "sheetbase-app-scripts push"
+	},
 	"keywords": [
 		"google-apps-script",
 		"sheets",
@@ -21,14 +28,13 @@
 		"url": "https://github.com/sheetbase/module-sheets-nosql-server/issues"
 	},
 	"dependencies": {
-		"@sheetbase/lodash-server": "4.17.11",
-		"@sheetbase/tamotsux-server": "0.0.1",
-		"@sheetbase/utils-server": "0.0.2"
-	},
-	"peerDependencies": {
-		"@sheetbase/core-server": "0.0.2"
+		"@sheetbase/core-server": "0.0.4",
+		"@sheetbase/lodash-server": "4.17.11-1",
+		"@sheetbase/tamotsux-server": "0.0.2",
+		"@sheetbase/utils-server": "0.0.4"
 	},
 	"devDependencies": {
+		"@sheetbase/app-scripts": "0.0.7",
 		"@types/google-apps-script": "0.0.28"
 	}
 }

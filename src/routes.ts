@@ -1,5 +1,5 @@
-import { ISheetbaseModule, IRoutingErrors, IAddonRoutesOptions, IHttpHandler } from '@sheetbase/core-server';
-import { ISheetsNosqlModule } from './types/module';
+import { IModule as ISheetbaseModule, IRoutingErrors, IAddonRoutesOptions, IHttpHandler } from '@sheetbase/core-server';
+import { IModule } from './types/module';
 
 export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
     'data/unknown': {
@@ -18,8 +18,8 @@ export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
 
 export function sheetsNosqlModuleRoutes(
     Sheetbase: ISheetbaseModule,
-    SheetsNosql: ISheetsNosqlModule,
-    options: IAddonRoutesOptions
+    SheetsNosql: IModule,
+    options: IAddonRoutesOptions = {}
 ): void {
     const customName: string = options.customName || 'data';
     const middlewares: IHttpHandler[] = options.middlewares || ([
@@ -27,8 +27,8 @@ export function sheetsNosqlModuleRoutes(
     ]);
 
     Sheetbase.Router.get('/' + customName, ... middlewares, (req, res) => {
-        const path: string = req.queries.path;
-        const type: string = req.queries.type;
+        const path: string = req.queries['path'];
+        const type: string = req.queries['type'];
         let data: any[] | {[key: string]: any};
         try {
             if (type === 'list') {
