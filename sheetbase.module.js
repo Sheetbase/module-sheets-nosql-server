@@ -5,7 +5,7 @@ var module = module || { exports: exports };
  * Name: @sheetbase/sheets-nosql-server
  * Export name: SheetsNosql
  * Description: Using Google Sheets as NoSQL database.
- * Version: 0.0.4
+ * Version: 0.0.3
  * Author: Sheetbase
  * Homepage: https://sheetbase.net
  * License: MIT
