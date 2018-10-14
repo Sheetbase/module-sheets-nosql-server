@@ -5,79 +5,91 @@ var module = module || { exports: exports };
  * Name: @sheetbase/sheets-nosql-server
  * Export name: SheetsNosql
  * Description: Using Google Sheets as NoSQL database.
- * Version: 0.0.3
+ * Version: 0.0.4
  * Author: Sheetbase
  * Homepage: https://sheetbase.net
  * License: MIT
  * Repo: https://github.com/sheetbase/module-sheets-nosql-server.git
  */
 
-function SheetsNosqlModule() {
-    // import { IModule as ISheetbaseModule, IRoutingErrors, IAddonRoutesOptions, IHttpHandler } from '@sheetbase/core-server';
-    // import { IModule } from './types/module';
-    var SHEETS_NOSQL_ROUTING_ERRORS = {
+function SheetsNosqlModule(options) {
+    // import { IRoutingErrors, IAddonRoutesOptions, IRouteHandler, IRouter, IRouteResponse } from '@sheetbase/core-server';
+    // import { IModule } from '../index';
+    var ROUTING_ERRORS = {
         'data/unknown': {
             status: 400, message: 'Unknown errors.'
         },
-        'data/no-path': {
-            status: 400, message: 'Missing "path" in query.'
+        'data/missing': {
+            status: 400, message: 'Missing input.'
         },
         'data/private-data': {
             status: 400, message: 'Can not modify private data.'
-        },
-        'data/no-updates': {
-            status: 400, message: 'Missing "updates" in body.'
         }
     };
-    function sheetsNosqlModuleRoutes(Sheetbase, SheetsNosql, options) {
+    function routingError(res, code) {
+        var error = ROUTING_ERRORS[code] || ROUTING_ERRORS['data/unknown'];
+        var status = error.status, message = error.message;
+        return res.error(code, message, status);
+    }
+    function sheetsNosqlModuleRoutes(SheetsNosql, Router, options) {
         if (options === void 0) { options = {}; }
-        var _a, _b;
-        var customName = options.customName || 'data';
+        var endpoint = options.endpoint || 'data';
         var middlewares = options.middlewares || ([
             function (req, res, next) { return next(); }
         ]);
-        (_a = Sheetbase.Router).get.apply(_a, ['/' + customName].concat(middlewares, [function (req, res) {
-                var path = req.queries['path'];
-                var type = req.queries['type'];
-                var data;
+        Router.get.apply(Router, ['/' + endpoint].concat(middlewares, [function (req, res) {
+                var result;
                 try {
+                    var path = req.query.path;
+                    var type = req.query.type;
                     if (type === 'list') {
-                        data = SheetsNosql.list(path);
+                        result = SheetsNosql.list(path);
                     }
                     else {
-                        data = SheetsNosql.object(path);
+                        result = SheetsNosql.object(path);
                     }
                 }
                 catch (code) {
-                    var _a = SHEETS_NOSQL_ROUTING_ERRORS[code], status = _a.status, message = _a.message;
-                    return res.error(code, message, status);
+                    return routingError(res, code);
                 }
-                return res.success(data);
+                return res.success(result);
             }]));
-        (_b = Sheetbase.Router).post.apply(_b, ['/' + customName].concat(middlewares, [function (req, res) {
-                var updates = req.body.updates;
+        Router.post.apply(Router, ['/' + endpoint].concat(middlewares, [function (req, res) {
                 try {
+                    var updates = req.body.updates;
                     SheetsNosql.update(updates);
                 }
                 catch (code) {
-                    var _a = SHEETS_NOSQL_ROUTING_ERRORS[code], status = _a.status, message = _a.message;
-                    return res.error(code, message, status);
+                    return routingError(res, code);
                 }
                 return res.success({
                     updated: true
                 });
             }]));
     }
+    // import { IAddonRoutesOptions } from '@sheetbase/core-server';
+    // import { Tamotsux } from '@sheetbase/tamotsux-server';
+    // import { Utils } from '@sheetbase/utils-server';
+    // import { Lodash } from '@sheetbase/lodash-server';
+    // import { IOptions } from '../index';
+    // import { sheetsNosqlModuleRoutes } from './routes';
     var SheetsNosql = /** @class */ (function () {
-        // TODO: Custom modifiers
-        function SheetsNosql() {
+        // TODO: TODO
+        // custom modifiers
+        // rule-based security
+        // need optimazation
+        // more tests
+        // fix bugs
+        // maybe indexing
+        function SheetsNosql(options) {
+            this.init(options);
         }
-        SheetsNosql.prototype.init = function (Sheetbase) {
-            this._Sheetbase = Sheetbase;
+        SheetsNosql.prototype.init = function (options) {
+            this._options = options;
             return this;
         };
         SheetsNosql.prototype.registerRoutes = function (options) {
-            sheetsNosqlModuleRoutes(this._Sheetbase, this, options);
+            sheetsNosqlModuleRoutes(this, this._options.router, options);
         };
         SheetsNosql.prototype.object = function (path) {
             return this.get(path);
@@ -93,15 +105,12 @@ function SheetsNosqlModule() {
             return this.list("/" + collectionId);
         };
         SheetsNosql.prototype.update = function (updates) {
-            // TODO: need optimazation
-            // TODO: more tests
-            // TODO: fix bugs
-            // TODO: maybe indexing
             if (!updates) {
-                throw new Error('data/no-updates');
+                throw new Error('data/missing');
             }
+            var databaseId = this._options.databaseId;
             // init tamotsux
-            Tamotsux.initialize(SpreadsheetApp.openById(this._Sheetbase.Config.get('databaseId')));
+            Tamotsux.initialize(SpreadsheetApp.openById(databaseId));
             // begin updating
             var models = {};
             var masterData = {};
@@ -160,7 +169,7 @@ function SheetsNosqlModule() {
         };
         SheetsNosql.prototype.get = function (path) {
             if (!path) {
-                throw new Error('data/no-path');
+                throw new Error('data/missing');
             }
             // process the path
             var pathSplits = path.split('/').filter(Boolean);
@@ -170,7 +179,8 @@ function SheetsNosqlModule() {
                 throw new Error('data/private-data');
             }
             // get master data & return data
-            var spreadsheet = SpreadsheetApp.openById(this._Sheetbase.Config.get('databaseId'));
+            var databaseId = this._options.databaseId;
+            var spreadsheet = SpreadsheetApp.openById(databaseId);
             var range = spreadsheet.getRange(collectionId + '!A1:ZZ');
             var values = range.getValues();
             var masterData = this._transform(values);
@@ -201,12 +211,11 @@ function SheetsNosqlModule() {
         };
         return SheetsNosql;
     }());
-    // import { IModule } from './types/module';
-    // import { SheetsNosql } from './sheets-nosql';
-    var moduleExports = new SheetsNosql();
+    var moduleExports = new SheetsNosql(options);
     return moduleExports || {};
 }
 exports.SheetsNosqlModule = SheetsNosqlModule;
-// add to the global namespace
-var proccess = proccess || this;
-proccess['SheetsNosql'] = SheetsNosqlModule();
+// add 'SheetsNosql' to the global namespace
+(function (process) {
+    process['SheetsNosql'] = SheetsNosqlModule();
+})(this);

@@ -73,11 +73,13 @@
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface"><a href="interfaces/imodule.html" class="tsd-kind-icon">IModule</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/ioptions.html" class="tsd-kind-icon">IOptions</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable"><a href="globals.html#sheetsnosqlmodule" class="tsd-kind-icon">Sheets<wbr>Nosql<wbr>Module</a></li>
 								<li class="tsd-kind-variable"><a href="globals.html#moduleexports" class="tsd-kind-icon">module<wbr>Exports</a></li>
 							</ul>
 						</section>
@@ -93,7 +95,7 @@
 						<section class="tsd-index-section ">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal"><a href="globals.html#sheets_nosql_routing_errors" class="tsd-kind-icon">SHEETS_<wbr>NOSQL_<wbr>ROUTING_<wbr>ERRORS</a></li>
+								<li class="tsd-kind-object-literal"><a href="globals.html#routing_errors" class="tsd-kind-icon">ROUTING_<wbr>ERRORS</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,12 +104,43 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable">
-					<a name="moduleexports" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> module<wbr>Exports</h3>
-					<div class="tsd-signature tsd-kind-icon">module<wbr>Exports<span class="tsd-signature-symbol">:</span> <a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a><span class="tsd-signature-symbol"> =&nbsp;new SheetsNosql()</span></div>
+					<a name="sheetsnosqlmodule" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Sheets<wbr>Nosql<wbr>Module</h3>
+					<div class="tsd-signature tsd-kind-icon">Sheets<wbr>Nosql<wbr>Module<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/index.ts#L4">index.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/index.ts#L4">index.ts:4</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="interfaces/ioptions.html" class="tsd-signature-type">IOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>options: <a href="interfaces/ioptions.html" class="tsd-signature-type">IOptions</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="moduleexports" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> module<wbr>Exports</h3>
+					<div class="tsd-signature tsd-kind-icon">module<wbr>Exports<span class="tsd-signature-symbol">:</span> <a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a><span class="tsd-signature-symbol"> =&nbsp;new SheetsNosql(options)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/index.ts#L7">index.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -124,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/example.ts#L10">example.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/example.ts#L6">example.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -141,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/example.ts#L19">example.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/example.ts#L11">example.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -158,7 +191,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/example.ts#L28">example.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/example.ts#L16">example.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -169,22 +202,22 @@
 					<a name="sheetsnosqlmoduleroutes" class="tsd-anchor"></a>
 					<h3>sheets<wbr>Nosql<wbr>Module<wbr>Routes</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">sheets<wbr>Nosql<wbr>Module<wbr>Routes<span class="tsd-signature-symbol">(</span>Sheetbase<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ISheetbaseModule</span>, SheetsNosql<span class="tsd-signature-symbol">: </span><a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">IAddonRoutesOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">sheets<wbr>Nosql<wbr>Module<wbr>Routes<span class="tsd-signature-symbol">(</span>SheetsNosql<span class="tsd-signature-symbol">: </span><a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a>, Router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IRouter</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">IAddonRoutesOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L19">routes.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L23">routes.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>Sheetbase: <span class="tsd-signature-type">ISheetbaseModule</span></h5>
+									<h5>SheetsNosql: <a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a></h5>
 								</li>
 								<li>
-									<h5>SheetsNosql: <a href="interfaces/imodule.html" class="tsd-signature-type">IModule</a></h5>
+									<h5>Router: <span class="tsd-signature-type">IRouter</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">IAddonRoutesOptions</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
@@ -198,130 +231,100 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Object literals</h2>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal">
-					<a name="sheets_nosql_routing_errors" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> SHEETS_<wbr>NOSQL_<wbr>ROUTING_<wbr>ERRORS</h3>
-					<div class="tsd-signature tsd-kind-icon">SHEETS_<wbr>NOSQL_<wbr>ROUTING_<wbr>ERRORS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="routing_errors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ROUTING_<wbr>ERRORS</h3>
+					<div class="tsd-signature tsd-kind-icon">ROUTING_<wbr>ERRORS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L4">routes.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L5">routes.ts:5</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
-						<a name="sheets_nosql_routing_errors.data_no_path" class="tsd-anchor"></a>
-						<h3>data/no-<wbr>path</h3>
-						<div class="tsd-signature tsd-kind-icon">data/no-<wbr>path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<a name="routing_errors.data_missing" class="tsd-anchor"></a>
+						<h3>data/missing</h3>
+						<div class="tsd-signature tsd-kind-icon">data/missing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L8">routes.ts:8</a></li>
+								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L9">routes.ts:9</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_no_path.message" class="tsd-anchor"></a>
+							<a name="routing_errors.data_missing.message" class="tsd-anchor"></a>
 							<h3>message</h3>
-							<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Missing &quot;path&quot; in query.&quot;</span></div>
+							<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Missing input.&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L9">routes.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L10">routes.ts:10</a></li>
 								</ul>
 							</aside>
 						</section>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_no_path.status" class="tsd-anchor"></a>
+							<a name="routing_errors.data_missing.status" class="tsd-anchor"></a>
 							<h3>status</h3>
 							<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;400</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L9">routes.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L10">routes.ts:10</a></li>
 								</ul>
 							</aside>
 						</section>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
-						<a name="sheets_nosql_routing_errors.data_no_updates" class="tsd-anchor"></a>
-						<h3>data/no-<wbr>updates</h3>
-						<div class="tsd-signature tsd-kind-icon">data/no-<wbr>updates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L14">routes.ts:14</a></li>
-							</ul>
-						</aside>
-						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_no_updates.message-1" class="tsd-anchor"></a>
-							<h3>message</h3>
-							<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Missing &quot;updates&quot; in body.&quot;</span></div>
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L15">routes.ts:15</a></li>
-								</ul>
-							</aside>
-						</section>
-						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_no_updates.status-1" class="tsd-anchor"></a>
-							<h3>status</h3>
-							<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;400</span></div>
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L15">routes.ts:15</a></li>
-								</ul>
-							</aside>
-						</section>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
-						<a name="sheets_nosql_routing_errors.data_private_data" class="tsd-anchor"></a>
+						<a name="routing_errors.data_private_data" class="tsd-anchor"></a>
 						<h3>data/private-<wbr>data</h3>
 						<div class="tsd-signature tsd-kind-icon">data/private-<wbr>data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L11">routes.ts:11</a></li>
+								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L12">routes.ts:12</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_private_data.message-2" class="tsd-anchor"></a>
+							<a name="routing_errors.data_private_data.message-1" class="tsd-anchor"></a>
 							<h3>message</h3>
 							<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Can not modify private data.&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L12">routes.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L13">routes.ts:13</a></li>
 								</ul>
 							</aside>
 						</section>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_private_data.status-2" class="tsd-anchor"></a>
+							<a name="routing_errors.data_private_data.status-1" class="tsd-anchor"></a>
 							<h3>status</h3>
 							<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;400</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L12">routes.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L13">routes.ts:13</a></li>
 								</ul>
 							</aside>
 						</section>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal">
-						<a name="sheets_nosql_routing_errors.data_unknown" class="tsd-anchor"></a>
+						<a name="routing_errors.data_unknown" class="tsd-anchor"></a>
 						<h3>data/unknown</h3>
 						<div class="tsd-signature tsd-kind-icon">data/unknown<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L5">routes.ts:5</a></li>
+								<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L6">routes.ts:6</a></li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_unknown.message-3" class="tsd-anchor"></a>
+							<a name="routing_errors.data_unknown.message-2" class="tsd-anchor"></a>
 							<h3>message</h3>
 							<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Unknown errors.&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L6">routes.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L7">routes.ts:7</a></li>
 								</ul>
 							</aside>
 						</section>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-							<a name="sheets_nosql_routing_errors.data_unknown.status-3" class="tsd-anchor"></a>
+							<a name="routing_errors.data_unknown.status-2" class="tsd-anchor"></a>
 							<h3>status</h3>
 							<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;400</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/8b79c31/src/routes.ts#L6">routes.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/Sheetbase/module-sheets-nosql-server/blob/67a95a2/src/routes.ts#L7">routes.ts:7</a></li>
 								</ul>
 							</aside>
 						</section>
@@ -345,6 +348,12 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/imodule.html" class="tsd-kind-icon">IModule</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ioptions.html" class="tsd-kind-icon">IOptions</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sheetsnosqlmodule" class="tsd-kind-icon">Sheets<wbr>Nosql<wbr>Module</a>
+					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#moduleexports" class="tsd-kind-icon">module<wbr>Exports</a>
 					</li>
@@ -361,7 +370,7 @@
 						<a href="globals.html#sheetsnosqlmoduleroutes" class="tsd-kind-icon">sheets<wbr>Nosql<wbr>Module<wbr>Routes</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#sheets_nosql_routing_errors" class="tsd-kind-icon">SHEETS_<wbr>NOSQL_<wbr>ROUTING_<wbr>ERRORS</a>
+						<a href="globals.html#routing_errors" class="tsd-kind-icon">ROUTING_<wbr>ERRORS</a>
 					</li>
 				</ul>
 			</nav>

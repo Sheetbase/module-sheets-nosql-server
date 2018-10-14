@@ -1,4 +1,7 @@
-import { IModule } from './types/module';
+import { IModule, IOptions } from '../index';
 import { SheetsNosql } from './sheets-nosql';
 
-export const moduleExports: IModule = new SheetsNosql();
+export declare const SheetsNosqlModule: {(options: IOptions): IModule};
+
+declare const options: IOptions;
+export const moduleExports: IModule = new SheetsNosql(options);

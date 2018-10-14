@@ -1,55 +1,53 @@
-import { IModule as ISheetbaseModule, IRoutingErrors, IAddonRoutesOptions, IHttpHandler } from '@sheetbase/core-server';
-import { IModule } from './types/module';
+import { IRoutingErrors, IAddonRoutesOptions, IRouteHandler, IRouter, IRouteResponse } from '@sheetbase/core-server';
 
-export const SHEETS_NOSQL_ROUTING_ERRORS: IRoutingErrors = {
+import { IModule } from '../index';
+
+export const ROUTING_ERRORS: IRoutingErrors = {
     'data/unknown': {
         status: 400, message: 'Unknown errors.',
     },
-    'data/no-path': {
-        status: 400, message: 'Missing "path" in query.',
+    'data/missing': {
+        status: 400, message: 'Missing input.',
     },
     'data/private-data': {
         status: 400, message: 'Can not modify private data.',
-    },
-    'data/no-updates': {
-        status: 400, message: 'Missing "updates" in body.',
     }
 };
 
-export function sheetsNosqlModuleRoutes(
-    Sheetbase: ISheetbaseModule,
-    SheetsNosql: IModule,
-    options: IAddonRoutesOptions = {}
-): void {
-    const customName: string = options.customName || 'data';
-    const middlewares: IHttpHandler[] = options.middlewares || ([
+function routingError(res: IRouteResponse, code: string) {
+    const error = ROUTING_ERRORS[code] || ROUTING_ERRORS['data/unknown'];
+    const { status, message } = error;
+    return res.error(code, message, status);
+}
+
+export function sheetsNosqlModuleRoutes(SheetsNosql: IModule, Router: IRouter, options: IAddonRoutesOptions = {}): void {
+    const endpoint: string = options.endpoint || 'data';
+    const middlewares: IRouteHandler[] = options.middlewares || ([
         (req, res, next) => next()
     ]);
 
-    Sheetbase.Router.get('/' + customName, ... middlewares, (req, res) => {
-        const path: string = req.queries['path'];
-        const type: string = req.queries['type'];
-        let data: any[] | {[key: string]: any};
+    Router.get('/' + endpoint, ... middlewares, (req, res) => {
+        let result: any[] | {[key: string]: any};
         try {
+            const path: string = req.query.path;
+            const type: string = req.query.type;
             if (type === 'list') {
-                data = SheetsNosql.list(path);
+                result = SheetsNosql.list(path);
             } else {
-                data = SheetsNosql.object(path);
+                result = SheetsNosql.object(path);
             }
         } catch (code) {
-            const { status, message } = SHEETS_NOSQL_ROUTING_ERRORS[code];
-            return res.error(code, message, status);
+            return routingError(res, code);
         }
-        return res.success(data);
+        return res.success(result);
     });
 
-    Sheetbase.Router.post('/' + customName, ... middlewares, (req, res) => {
-        const updates: {[key: string]: any} = req.body.updates;
+    Router.post('/' + endpoint, ... middlewares, (req, res) => {
         try {
+            const updates: {[key: string]: any} = req.body.updates;
             SheetsNosql.update(updates);
         } catch (code) {
-            const { status, message } = SHEETS_NOSQL_ROUTING_ERRORS[code];
-            return res.error(code, message, status);
+            return routingError(res, code);
         }
         return res.success({
             updated: true

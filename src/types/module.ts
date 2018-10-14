@@ -1,7 +1,9 @@
-import { IModule as ISheetbaseModule, IAddonRoutesOptions } from '@sheetbase/core-server';
+import { IAddonRoutesOptions } from '@sheetbase/core-server';
 
-export interface IModule {    
-    init(Sheetbase: ISheetbaseModule): IModule;
+import { IOptions } from './option';
+
+export interface IModule {
+    init(options: IOptions): IModule;
     registerRoutes(options?: IAddonRoutesOptions): void;
     object(path: string);
     list(path: string): any[];

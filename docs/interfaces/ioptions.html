@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@sheetbase/sheets-nosql-server</title>
+	<title>IOptions | @sheetbase/sheets-nosql-server</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">@sheetbase/sheets-nosql-server</a>
+					<a href="../index.html" class="title">@sheetbase/sheets-nosql-server</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -49,109 +49,116 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="ioptions.html">IOptions</a>
 				</li>
 			</ul>
-			<h1> @sheetbase/sheets-nosql-server</h1>
+			<h1>Interface IOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="sheetbase-module-sheetbase-sheets-nosql-server">Sheetbase Module: @sheetbase/sheets-nosql-server</h1>
-				<p>Using Google Sheets as NoSQL database.</p>
-				<!-- <block:header> -->
-				<p><a href="https://github.com/sheetbase/module-sheets-nosql-server/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="License"></a> <a href="https://github.com/google/clasp"><img src="https://img.shields.io/badge/built%20with-clasp-4285f4.svg" alt="clasp"></a> <a href="https://www.patreon.com/lamnhan"><img src="https://ionicabizau.github.io/badges/patreon.svg" alt="Support me on Patreon"></a> <a href="https://www.paypal.me/lamnhan"><img src="https://ionicabizau.github.io/badges/paypal_donate.svg" alt="PayPal"></a> <a href="https://m.me/sheetbase"><img src="https://img.shields.io/badge/ask/me-anything-1abc9c.svg" alt="Ask me anything"></a></p>
-				<!-- </block:header> -->
-				<h2 id="install">Install</h2>
-				<ul>
-					<li><p>Using npm: <code>npm install --save @sheetbase/sheets-nosql-server</code></p>
-					</li>
-					<li><p>As a library: <code>1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb</code></p>
-						<p>Set the <em>Indentifier</em> to <strong>SheetsNosql</strong> and select the lastest version, <a href="https://script.google.com/d/1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb/edit?usp=sharing">view code</a>.</p>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">IOptions</span>
 					</li>
 				</ul>
-				<h2 id="scopes">Scopes</h2>
-				<p><code>https://www.googleapis.com/auth/script.scriptapp</code></p>
-				<p><code>https://www.googleapis.com/auth/spreadsheets</code></p>
-				<h2 id="examples">Examples</h2>
-				<pre><code class="language-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example1</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span> </span>{
-  <span class="hljs-keyword">const</span> object = SheetsNosql.object(<span class="hljs-string">"/foo/foo-3"</span>);
-  Logger.log(object);
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example2</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span> </span>{
-  <span class="hljs-keyword">const</span> list = SheetsNosql.list(<span class="hljs-string">"/foo/foo-2/content"</span>);
-  Logger.log(list);
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example3</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span> </span>{
-  <span class="hljs-keyword">const</span> update = SheetsNosql.update({
-    <span class="hljs-string">"/foo/foo-6/content"</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()
-  });
-  Logger.log(update);
-}</code></pre>
-				<h2 id="documentation">Documentation</h2>
-				<p>See the docs: <a href="https://sheetbase.github.io/module-sheets-nosql-server">https://sheetbase.github.io/module-sheets-nosql-server</a></p>
-				<h2 id="api">API</h2>
-				<p>An overview of the API, for detail please refer <a href="https://sheetbase.github.io/module-sheets-nosql-server">the documentation</a>.</p>
-				<h3 id="sheetsnosql">SheetsNosql</h3>
-				<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> IModule {
-  init(options: IOptions): IModule;
-  registerRoutes(options?: IAddonRoutesOptions): <span class="hljs-built_in">void</span>;
-  object(path: <span class="hljs-built_in">string</span>);
-  list(path: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">any</span>[];
-  doc(collectionId: <span class="hljs-built_in">string</span>, docId: <span class="hljs-built_in">string</span>);
-  collection(collectionId: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">any</span>[];
-  update(updates: { [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span> }): <span class="hljs-built_in">boolean</span>;
-}</code></pre>
-				<h2 id="license">License</h2>
-				<p><strong>@sheetbase/sheets-nosql-server</strong> is released under the <a href="https://github.com/sheetbase/module-sheets-nosql-server/blob/master/LICENSE">MIT</a> license.</p>
-				<!-- <block:footer> -->
-				<!-- </block:footer> -->
-			</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ioptions.html#databaseid" class="tsd-kind-icon">database<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ioptions.html#router" class="tsd-kind-icon">router</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="databaseid" class="tsd-anchor"></a>
+					<h3>database<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">database<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in types/option.ts:4</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="router" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> router</h3>
+					<div class="tsd-signature tsd-kind-icon">router<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IRouter</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in types/option.ts:5</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/sheetsnosql.html" class="tsd-kind-icon">Sheets<wbr>Nosql</a>
+						<a href="../classes/sheetsnosql.html" class="tsd-kind-icon">Sheets<wbr>Nosql</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/imodule.html" class="tsd-kind-icon">IModule</a>
+						<a href="imodule.html" class="tsd-kind-icon">IModule</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/ioptions.html" class="tsd-kind-icon">IOptions</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="ioptions.html" class="tsd-kind-icon">IOptions</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ioptions.html#databaseid" class="tsd-kind-icon">database<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ioptions.html#router" class="tsd-kind-icon">router</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#sheetsnosqlmodule" class="tsd-kind-icon">Sheets<wbr>Nosql<wbr>Module</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#sheetsnosqlmodule" class="tsd-kind-icon">Sheets<wbr>Nosql<wbr>Module</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#moduleexports" class="tsd-kind-icon">module<wbr>Exports</a>
+						<a href="../globals.html#moduleexports" class="tsd-kind-icon">module<wbr>Exports</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#example1" class="tsd-kind-icon">example1</a>
+						<a href="../globals.html#example1" class="tsd-kind-icon">example1</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#example2" class="tsd-kind-icon">example2</a>
+						<a href="../globals.html#example2" class="tsd-kind-icon">example2</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#example3" class="tsd-kind-icon">example3</a>
+						<a href="../globals.html#example3" class="tsd-kind-icon">example3</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#sheetsnosqlmoduleroutes" class="tsd-kind-icon">sheets<wbr>Nosql<wbr>Module<wbr>Routes</a>
+						<a href="../globals.html#sheetsnosqlmoduleroutes" class="tsd-kind-icon">sheets<wbr>Nosql<wbr>Module<wbr>Routes</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#routing_errors" class="tsd-kind-icon">ROUTING_<wbr>ERRORS</a>
+						<a href="../globals.html#routing_errors" class="tsd-kind-icon">ROUTING_<wbr>ERRORS</a>
 					</li>
 				</ul>
 			</nav>
@@ -221,7 +228,7 @@
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

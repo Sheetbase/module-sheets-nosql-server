@@ -2,11 +2,11 @@
 
 Using Google Sheets as NoSQL database.
 
-<!-- <content> -->
+<!-- <block:header> -->
 
 [![License][license_badge]][license_url] [![clasp][clasp_badge]][clasp_url] [![Support me on Patreon][patreon_badge]][patreon_url] [![PayPal][paypal_donate_badge]][paypal_donate_url] [![Ask me anything][ask_me_badge]][ask_me_url]
 
-<!-- </content> -->
+<!-- </block:header> -->
 
 ## Install
 
@@ -18,44 +18,25 @@ Using Google Sheets as NoSQL database.
 
 ## Scopes
 
-`https://www.googleapis.com/auth/script.scriptapp https://www.googleapis.com/auth/spreadsheets`
+`https://www.googleapis.com/auth/script.scriptapp`
+
+`https://www.googleapis.com/auth/spreadsheets`
 
 ## Examples
 
 ```ts
 function example1(): void {
-  const Database = SheetsNosql.init(Sheetbase);
-  // for demo
-  Sheetbase.Config.set(
-    "databaseId",
-    "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI"
-  );
-  // get data
-  const object = Database.object("/foo/foo-3");
+  const object = SheetsNosql.object("/foo/foo-3");
   Logger.log(object);
 }
 
 function example2(): void {
-  const Database = SheetsNosql.init(Sheetbase);
-  // for demo
-  Sheetbase.Config.set(
-    "databaseId",
-    "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI"
-  );
-  // get data
-  const list = Database.list("/foo/foo-2/content");
+  const list = SheetsNosql.list("/foo/foo-2/content");
   Logger.log(list);
 }
 
 function example3(): void {
-  const Database = SheetsNosql.init(Sheetbase);
-  // for demo
-  Sheetbase.Config.set(
-    "databaseId",
-    "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI"
-  );
-  // update data
-  const update = Database.update({
+  const update = SheetsNosql.update({
     "/foo/foo-6/content": new Date().getTime()
   });
   Logger.log(update);
@@ -68,13 +49,13 @@ See the docs: https://sheetbase.github.io/module-sheets-nosql-server
 
 ## API
 
-An overview of the API, for detail please refer [the documentation](https://sheetbase.github.io/module-sheets-nosql-server)
+An overview of the API, for detail please refer [the documentation](https://sheetbase.github.io/module-sheets-nosql-server).
 
 ### SheetsNosql
 
 ```ts
 export interface IModule {
-  init(Sheetbase: ISheetbaseModule): IModule;
+  init(options: IOptions): IModule;
   registerRoutes(options?: IAddonRoutesOptions): void;
   object(path: string);
   list(path: string): any[];
@@ -88,7 +69,7 @@ export interface IModule {
 
 **@sheetbase/sheets-nosql-server** is released under the [MIT](https://github.com/sheetbase/module-sheets-nosql-server/blob/master/LICENSE) license.
 
-<!-- <footer> -->
+<!-- <block:footer> -->
 
 [license_badge]: https://img.shields.io/github/license/mashape/apistatus.svg
 [license_url]: https://github.com/sheetbase/module-sheets-nosql-server/blob/master/LICENSE
@@ -101,4 +82,4 @@ export interface IModule {
 [ask_me_badge]: https://img.shields.io/badge/ask/me-anything-1abc9c.svg
 [ask_me_url]: https://m.me/sheetbase
 
-<!-- </footer> -->
+<!-- </block:footer> -->

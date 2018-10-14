@@ -1,28 +1,33 @@
-import { IModule as ISheetbaseModule, IAddonRoutesOptions } from '@sheetbase/core-server';
-import { IModule as ITamotsuxModule } from '@sheetbase/tamotsux-server';
-import { IModule as IUtilsModule } from '@sheetbase/utils-server';
+import { IAddonRoutesOptions } from '@sheetbase/core-server';
+import { Tamotsux } from '@sheetbase/tamotsux-server';
+import { Utils } from '@sheetbase/utils-server';
+import { Lodash } from '@sheetbase/lodash-server';
 
+import { IOptions } from '../index';
 import { sheetsNosqlModuleRoutes } from './routes';
 
-declare const Tamotsux: ITamotsuxModule;
-declare const Utils: IUtilsModule;
-declare const Lodash;
-
-
 export class SheetsNosql {
-    private _Sheetbase: ISheetbaseModule;
+    private _options: IOptions;
 
-    // TODO: Custom modifiers
+    // TODO: TODO
+    // custom modifiers
+    // rule-based security
+    // need optimazation
+    // more tests
+    // fix bugs
+    // maybe indexing
 
-    constructor() {}
+    constructor(options: IOptions) {
+        this.init(options);
+    }
     
-    init(Sheetbase: ISheetbaseModule) {
-        this._Sheetbase = Sheetbase;
+    init(options: IOptions) {
+        this._options = options;
         return this;
     }
 
     registerRoutes(options?: IAddonRoutesOptions): void {
-        sheetsNosqlModuleRoutes(this._Sheetbase, this, options);
+        sheetsNosqlModuleRoutes(this, this._options.router, options);
     }
 
     object(path: string) {
@@ -41,19 +46,13 @@ export class SheetsNosql {
     }
 
     update(updates: {[key: string]: any}): boolean {
-        // TODO: need optimazation
-        // TODO: more tests
-        // TODO: fix bugs
-        // TODO: maybe indexing
-
         if (!updates) {
-            throw new Error('data/no-updates');
+            throw new Error('data/missing');
         }
 
+        const { databaseId } = this._options;
         // init tamotsux
-        Tamotsux.initialize(SpreadsheetApp.openById(
-            this._Sheetbase.Config.get('databaseId')
-        ));
+        Tamotsux.initialize(SpreadsheetApp.openById(databaseId));
         
         // begin updating
         let models = {};
@@ -111,7 +110,7 @@ export class SheetsNosql {
 
     get(path: string) {
         if (!path) {
-            throw new Error('data/no-path');
+            throw new Error('data/missing');
         }
         // process the path
         let pathSplits: string[] = path.split('/').filter(Boolean);
@@ -121,9 +120,9 @@ export class SheetsNosql {
             throw new Error('data/private-data');
         }
         // get master data & return data
-        let spreadsheet = SpreadsheetApp.openById(
-            this._Sheetbase.Config.get('databaseId')
-        );
+        
+        const { databaseId } = this._options;
+        let spreadsheet = SpreadsheetApp.openById(databaseId);
         let range = spreadsheet.getRange(collectionId + '!A1:ZZ');
         let values = range.getValues();
         let masterData = this._transform(values);
