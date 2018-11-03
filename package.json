@@ -21,10 +21,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/sheetbase/module-sheets-nosql-server.git"
+		"url": "https://github.com/sheetbase/sheets-nosql-server.git"
 	},
 	"bugs": {
-		"url": "https://github.com/sheetbase/module-sheets-nosql-server/issues"
+		"url": "https://github.com/sheetbase/sheets-nosql-server/issues"
 	},
 	"dependencies": {
 		"@sheetbase/lodash-server": "^4.17.11-2",
