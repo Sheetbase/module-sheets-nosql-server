@@ -1,8 +1,14 @@
-import { IRoutingErrors, IAddonRoutesOptions, IRouteHandler, IRouter, IRouteResponse } from '@sheetbase/core-server';
+import {
+    RoutingErrors,
+    AddonRoutesOptions,
+    RouteHandler,
+    RouterService,
+    RouteResponse,
+} from '@sheetbase/core-server';
 
-import { IModule } from '../index';
+import { SheetsNosqlService } from './sheets-nosql';
 
-export const ROUTING_ERRORS: IRoutingErrors = {
+export const ROUTING_ERRORS: RoutingErrors = {
     'data/unknown': {
         status: 400, message: 'Unknown errors.',
     },
@@ -11,19 +17,23 @@ export const ROUTING_ERRORS: IRoutingErrors = {
     },
     'data/private-data': {
         status: 400, message: 'Can not modify private data.',
-    }
+    },
 };
 
-function routingError(res: IRouteResponse, code: string) {
+function routingError(res: RouteResponse, code: string) {
     const error = ROUTING_ERRORS[code] || ROUTING_ERRORS['data/unknown'];
     const { status, message } = error;
     return res.error(code, message, status);
 }
 
-export function sheetsNosqlModuleRoutes(SheetsNosql: IModule, Router: IRouter, options: IAddonRoutesOptions = {}): void {
+export function sheetsNosqlModuleRoutes(
+    SheetsNosql: SheetsNosqlService,
+    Router: RouterService,
+    options: AddonRoutesOptions = {},
+): void {
     const endpoint: string = options.endpoint || 'data';
-    const middlewares: IRouteHandler[] = options.middlewares || ([
-        (req, res, next) => next()
+    const middlewares: RouteHandler[] = options.middlewares || ([
+        (req, res, next) => next(),
     ]);
 
     Router.get('/' + endpoint, ... middlewares, (req, res) => {
@@ -50,7 +60,7 @@ export function sheetsNosqlModuleRoutes(SheetsNosql: IModule, Router: IRouter, o
             return routingError(res, code);
         }
         return res.success({
-            updated: true
+            updated: true,
         });
     });
 }

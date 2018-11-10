@@ -1,21 +1,30 @@
-import { SheetsNosqlModule } from '../index';
+import * as SheetsNosql from './public_api';
 
-const databaseId = '1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI';
-const SheetsNosql = SheetsNosqlModule({ databaseId });
+function load() {
+    return SheetsNosql.sheetsNosql({
+        databaseId: '1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI',
+    });
+}
 
 export function example1(): void {
-    const object = SheetsNosql.object('/foo/foo-3');
+    const DB = load();
+
+    const object = DB.object('/foo/foo-3');
     Logger.log(object);
 }
 
 export function example2(): void {
-    const list = SheetsNosql.list('/foo/foo-2/content');
+    const DB = load();
+
+    const list = DB.list('/foo/foo-2/content');
     Logger.log(list);
 }
 
 export function example3(): void {
-    const update = SheetsNosql.update({
-        '/foo/foo-6/content': (new Date()).getTime()
+    const DB = load();
+
+    const update = DB.update({
+        '/foo/foo-6/content': (new Date()).getTime(),
     });
     Logger.log(update);
 }

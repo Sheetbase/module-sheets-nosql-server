@@ -4,80 +4,87 @@ Using Google Sheets as NoSQL database.
 
 <!-- <block:header> -->
 
-[![License][license_badge]][license_url] [![clasp][clasp_badge]][clasp_url] [![Support me on Patreon][patreon_badge]][patreon_url] [![PayPal][paypal_donate_badge]][paypal_donate_url] [![Ask me anything][ask_me_badge]][ask_me_url]
+[![Build Status](https://travis-ci.com/sheetbase/sheets-nosql-server.svg?branch=master)](https://travis-ci.com/sheetbase/sheets-nosql-server) [![Coverage Status](https://coveralls.io/repos/github/sheetbase/sheets-nosql-server/badge.svg?branch=master)](https://coveralls.io/github/sheetbase/sheets-nosql-server?branch=master) [![NPM](https://img.shields.io/npm/v/@sheetbase/sheets-nosql-server.svg)](https://www.npmjs.com/package/@sheetbase/sheets-nosql-server) [![License][license_badge]][license_url] [![clasp][clasp_badge]][clasp_url] [![Support me on Patreon][patreon_badge]][patreon_url] [![PayPal][paypal_donate_badge]][paypal_donate_url] [![Ask me anything][ask_me_badge]][ask_me_url]
 
 <!-- </block:header> -->
 
 ## Install
 
-- Using npm: `npm install --save @sheetbase/sheets-nosql-server`
+Using npm: `npm install --save @sheetbase/sheets-nosql-server`
 
-- As a library: `1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb`
+```ts
+import * as SheetsNosql from "@sheetbase/sheets-nosql-server";
+```
 
-  Set the _Indentifier_ to **SheetsNosql** and select the lastest version, [view code](https://script.google.com/d/1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb/edit?usp=sharing).
+As a library: `1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb`
+
+Set the _Indentifier_ to **SheetsNosqlModule** and select the lastest version, [view code](https://script.google.com/d/1C88aLF7cK6DFfXGk6Xa8uFRHjHyGpAEfX1-x7XprjSpSazq7d3AI8sNb/edit?usp=sharing).
+
+```ts
+declare const SheetsNosqlModule: { SheetsNosql: any };
+const SheetsNosql = SheetsNosqlModule.SheetsNosql;
+```
 
 ## Scopes
 
-`https://www.googleapis.com/auth/script.scriptapp`
+`https://www.googleapis.com/auth/script.scriptapp
 
-`https://www.googleapis.com/auth/spreadsheets`
+https://www.googleapis.com/auth/spreadsheets`
 
-## Examples
+## Usage
+
+- Docs homepage: https://sheetbase.github.io/sheets-nosql-server
+
+- API reference: https://sheetbase.github.io/sheets-nosql-server/api
+
+### Examples
 
 ```ts
-function example1(): void {
-  const object = SheetsNosql.object("/foo/foo-3");
+import * as SheetsNosql from "./public_api";
+
+function load() {
+  return SheetsNosql.sheetsNosql({
+    databaseId: "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI"
+  });
+}
+
+export function example1(): void {
+  const DB = load();
+
+  const object = DB.object("/foo/foo-3");
   Logger.log(object);
 }
 
-function example2(): void {
-  const list = SheetsNosql.list("/foo/foo-2/content");
+export function example2(): void {
+  const DB = load();
+
+  const list = DB.list("/foo/foo-2/content");
   Logger.log(list);
 }
 
-function example3(): void {
-  const update = SheetsNosql.update({
+export function example3(): void {
+  const DB = load();
+
+  const update = DB.update({
     "/foo/foo-6/content": new Date().getTime()
   });
   Logger.log(update);
 }
 ```
 
-## Documentation
-
-See the docs: https://sheetbase.github.io/module-sheets-nosql-server
-
-## API
-
-An overview of the API, for detail please refer [the documentation](https://sheetbase.github.io/module-sheets-nosql-server).
-
-### SheetsNosql
-
-```ts
-export interface IModule {
-  init(options: IOptions): IModule;
-  registerRoutes(options?: IAddonRoutesOptions): void;
-  object(path: string);
-  list(path: string): any[];
-  doc(collectionId: string, docId: string);
-  collection(collectionId: string): any[];
-  update(updates: { [key: string]: any }): boolean;
-}
-```
-
 ## License
 
-**@sheetbase/sheets-nosql-server** is released under the [MIT](https://github.com/sheetbase/module-sheets-nosql-server/blob/master/LICENSE) license.
+**@sheetbase/sheets-nosql-server** is released under the [MIT](https://github.com/sheetbase/sheets-nosql-server/blob/master/LICENSE) license.
 
 <!-- <block:footer> -->
 
 [license_badge]: https://img.shields.io/github/license/mashape/apistatus.svg
-[license_url]: https://github.com/sheetbase/module-sheets-nosql-server/blob/master/LICENSE
+[license_url]: https://github.com/sheetbase/sheets-nosql-server/blob/master/LICENSE
 [clasp_badge]: https://img.shields.io/badge/built%20with-clasp-4285f4.svg
 [clasp_url]: https://github.com/google/clasp
-[patreon_badge]: https://ionicabizau.github.io/badges/patreon.svg
+[patreon_badge]: https://lamnhan.github.io/assets/images/badges/patreon.svg
 [patreon_url]: https://www.patreon.com/lamnhan
-[paypal_donate_badge]: https://ionicabizau.github.io/badges/paypal_donate.svg
+[paypal_donate_badge]: https://lamnhan.github.io/assets/images/badges/paypal_donate.svg
 [paypal_donate_url]: https://www.paypal.me/lamnhan
 [ask_me_badge]: https://img.shields.io/badge/ask/me-anything-1abc9c.svg
 [ask_me_url]: https://m.me/sheetbase

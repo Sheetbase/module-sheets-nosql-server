@@ -1,13 +1,15 @@
-import { IAddonRoutesOptions } from '@sheetbase/core-server';
-import { Tamotsux } from '@sheetbase/tamotsux-server';
-import { Utils } from '@sheetbase/utils-server';
-import { Lodash } from '@sheetbase/lodash-server';
+import { AddonRoutesOptions, UtilsService } from '@sheetbase/core-server';
+import { initialize, Table } from '@sheetbase/tamotsux-server';
+import get from 'lodash-es/get';
+import set from 'lodash-es/set';
 
-import { IOptions } from '../index';
+import { Options } from './types';
 import { sheetsNosqlModuleRoutes } from './routes';
 
-export class SheetsNosql {
-    private _options: IOptions;
+const Utils = new UtilsService();
+
+export class SheetsNosqlService {
+    private options: Options;
 
     // TODO: TODO
     // custom modifiers
@@ -17,17 +19,12 @@ export class SheetsNosql {
     // fix bugs
     // maybe indexing
 
-    constructor(options: IOptions) {
-        this.init(options);
-    }
-    
-    init(options: IOptions) {
-        this._options = options;
-        return this;
+    constructor(options: Options) {
+        this.options = options;
     }
 
-    registerRoutes(options?: IAddonRoutesOptions): void {
-        sheetsNosqlModuleRoutes(this, this._options.router, options);
+    registerRoutes(options?: AddonRoutesOptions): void {
+        sheetsNosqlModuleRoutes(this, this.options.router, options);
     }
 
     object(path: string) {
@@ -40,7 +37,7 @@ export class SheetsNosql {
 
     doc(collectionId: string, docId: string) {
         return this.object(`/${collectionId}/${docId}`);
-    }        
+    }
     collection(collectionId: string): any[] {
         return this.list(`/${collectionId}`);
     }
@@ -50,13 +47,13 @@ export class SheetsNosql {
             throw new Error('data/missing');
         }
 
-        const { databaseId } = this._options;
+        const { databaseId } = this.options;
         // init tamotsux
-        Tamotsux.initialize(SpreadsheetApp.openById(databaseId));
-        
+        initialize(SpreadsheetApp.openById(databaseId));
+
         // begin updating
-        let models = {};
-        let masterData = {};
+        const models = {};
+        const masterData = {};
         for (const path of Object.keys(updates)) {
             const pathSplits: string[] = path.split('/').filter(Boolean);
             const collectionId: string = pathSplits.shift();
@@ -65,39 +62,40 @@ export class SheetsNosql {
             // private
             if (collectionId.substr(0, 1) === '_') {
                 continue;
-            }                
+            }
             if (!docId) {
                 continue;
             }
 
             // models
             if (!models[collectionId]) {
-                models[collectionId] = Tamotsux.Table.define({sheetName: collectionId});
+                models[collectionId] = Table.define({sheetName: collectionId});
             }
             if (!masterData[collectionId]) {
                 masterData[collectionId] = this.get(`/${collectionId}`) || {};
             }
 
             // update data in memory
-            Lodash.set(masterData[collectionId], pathSplits, updates[path]);
+            set(masterData[collectionId], pathSplits, updates[path]);
             // load item from sheet
-            let item = models[collectionId].where(function (itemInDB) {
+            let item = models[collectionId].where((itemInDB) => {
                 return (itemInDB['key'] === docId) ||
                     (itemInDB['slug'] === docId) ||
                     ((itemInDB['id'] + '') === docId) ||
                     ((itemInDB['#'] + '') === docId);
             }).first();
             // update the model
-            let dataInMemory = Object.assign({
-                'key': docId, 'slug': docId, 'id': docId
-            }, masterData[collectionId][docId]);
+            const dataInMemory = {
+                key: docId, slug: docId, id: docId,
+                ... masterData[collectionId][docId],
+            };
             for (const key of Object.keys(dataInMemory)) {
                 if (dataInMemory[key] instanceof Object) {
                     dataInMemory[key] = JSON.stringify(dataInMemory[key]);
                 }
             }
             if (item) {
-                item = Object.assign(item, dataInMemory);
+                item = { ... item, ... dataInMemory };
             } else {
                 item = models[collectionId].create(dataInMemory);
             }
@@ -108,29 +106,29 @@ export class SheetsNosql {
         return true;
     }
 
-    get(path: string) {
+    private get(path: string) {
         if (!path) {
             throw new Error('data/missing');
         }
         // process the path
-        let pathSplits: string[] = path.split('/').filter(Boolean);
-        let collectionId: string = pathSplits.shift();
+        const pathSplits: string[] = path.split('/').filter(Boolean);
+        const collectionId: string = pathSplits.shift();
         // TODO: replace with rule based security
         if (collectionId.substr(0, 1) === '_') {
             throw new Error('data/private-data');
         }
         // get master data & return data
-        
-        const { databaseId } = this._options;
-        let spreadsheet = SpreadsheetApp.openById(databaseId);
-        let range = spreadsheet.getRange(collectionId + '!A1:ZZ');
-        let values = range.getValues();
-        let masterData = this._transform(values);
-        return Lodash.get(masterData, pathSplits);
+
+        const { databaseId } = this.options;
+        const spreadsheet = SpreadsheetApp.openById(databaseId);
+        const range = spreadsheet.getRange(collectionId + '!A1:ZZ');
+        const values = range.getValues();
+        const masterData = this.transform(values);
+        return get(masterData, pathSplits);
     }
 
-    private _transform(values: any[][], noHeaders: boolean = false) {
-        let items: any[] = [];
+    private transform(values: any[][], noHeaders = false) {
+        const items: any[] = [];
         let headers: string [] = ['value'];
         let data: any[] = values || [];
         if (!noHeaders) {
@@ -138,8 +136,8 @@ export class SheetsNosql {
             data = values.slice(1, values.length) || [];
         }
         for (let i = 0; i < data.length; i++) {
-            let rows = data[i];
-            let item = {};
+            const rows = data[i];
+            const item = {};
             for (let j = 0; j < rows.length; j++) {
                 if (rows[j]) {
                     item[headers[j] || (headers[0] + j)] = rows[j];
