@@ -1,6 +1,6 @@
 {
    "name": "@sheetbase/sheets-nosql-server",
-   "version": "0.0.5",
+   "version": "0.0.6",
    "description": "Using Google Sheets as NoSQL database.",
    "author": "Sheetbase",
    "homepage": "https://sheetbase.net",
@@ -37,11 +37,9 @@
       "url": "https://github.com/sheetbase/sheets-nosql-server/issues"
    },
    "dependencies": {
+      "@sheetbase/core-server": "0.0.12",
       "@sheetbase/tamotsux-server": "0.0.4",
       "lodash-es": "^4.17.11"
-   },
-   "peerDependencies": {
-      "@sheetbase/core-server": "0.0.12"
    },
    "devDependencies": {
       "@sheetbase/app-scripts": "0.0.26",
