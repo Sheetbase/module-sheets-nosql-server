@@ -1803,6 +1803,9 @@
     function moduleRoutes(SheetsNosql, options) {
         if (options === void 0) { options = {}; }
         var _a = SheetsNosql.getOptions(), Router = _a.router, disabledRoutes = _a.disabledRoutes;
+        if (!Router) {
+            throw new Error('No router, please check out for Sheetbase Router.');
+        }
         var endpoint = options.endpoint || 'data';
         var middlewares = options.middlewares || ([
             function (req, res, next) { return next(); },

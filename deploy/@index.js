@@ -3,19 +3,17 @@
  * Name: @sheetbase/sheets-nosql-server
  * Export name: SheetsNosql
  * Description: Using Google Sheets as NoSQL database.
- * Version: 0.0.5
+ * Version: 0.0.6
  * Author: Sheetbase
  * Homepage: https://sheetbase.net
  * License: MIT
  * Repo: https://github.com/sheetbase/sheets-nosql-server.git
  */
 
-var DATABASE_ID = "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI";
+var databaseId = "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI";
 
 function load_() {
-  return SheetsNosql.sheetsNosql({
-    databaseId: DATABASE_ID
-  });
+  return SheetsNosql.sheetsNosql({ databaseId: databaseId });
 }
 function example1() {
   var DB = load_();

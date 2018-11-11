@@ -13,8 +13,8 @@ var __assign = (this && this.__assign) || function () {
 exports.__esModule = true;
 var core_server_1 = require("@sheetbase/core-server");
 var tamotsux_server_1 = require("@sheetbase/tamotsux-server");
-var get_1 = require("lodash-es/get");
-var set_1 = require("lodash-es/set");
+var get_1 = require("lodash/get");
+var set_1 = require("lodash/set");
 var routes_1 = require("./routes");
 var SheetsNosqlService = /** @class */ (function () {
     // TODO: TODO

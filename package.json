@@ -18,7 +18,7 @@
       "build": "npm run module && npm run readme && npm run docs && npm run transpile-test",
       "deploy": "sheetbase-app-scripts deploy",
       "lint": "tslint --project tslint.json && echo 'No lint errors.'",
-      "transpile-test": "tsc --project tests/tsconfig.test.json",
+      "transpile-test": "tsc --project tests/tsconfig.test.json && replace-in-file /lodash-es/g lodash tests/out-tsc/src/lib/sheets-nosql.js --isRegex",
       "test": "nyc --cache false mocha --timeout 100000 -- tests/out-tsc/tests/*.js",
       "coverage": "nyc --cache false report --reporter=text-lcov | coveralls"
    },
@@ -52,6 +52,7 @@
       "coveralls": "^3.0.2",
       "mocha": "^5.2.0",
       "nyc": "^13.1.0",
+      "replace-in-file": "^3.4.2",
       "rollup-plugin-node-resolve": "^3.4.0",
       "tslint": "^5.11.0",
       "typescript": "^3.1.6"

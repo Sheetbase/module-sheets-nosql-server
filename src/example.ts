@@ -1,11 +1,9 @@
 import * as SheetsNosql from './public_api';
 
-const DATABASE_ID = '1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI';
+const databaseId = '1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI';
 
 function load_() {
-    return SheetsNosql.sheetsNosql({
-        databaseId: DATABASE_ID,
-    });
+    return SheetsNosql.sheetsNosql({ databaseId });
 }
 
 export function example1(): void {
@@ -31,4 +29,4 @@ export function example3(): void {
     Logger.log(update);
 }
 
-export { DATABASE_ID };
+export { databaseId };

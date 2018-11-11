@@ -1,12 +1,10 @@
 "use strict";
 exports.__esModule = true;
 var SheetsNosql = require("./public_api");
-var DATABASE_ID = '1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI';
-exports.DATABASE_ID = DATABASE_ID;
+var databaseId = '1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI';
+exports.databaseId = databaseId;
 function load_() {
-    return SheetsNosql.sheetsNosql({
-        databaseId: DATABASE_ID
-    });
+    return SheetsNosql.sheetsNosql({ databaseId: databaseId });
 }
 function example1() {
     var DB = load_();
