@@ -31,7 +31,7 @@ export function moduleRoutes(
 ): void {
     const { router: Router, disabledRoutes } = SheetsNosql.getOptions();
 
-	if (!Router) {
+    if (!Router) {
         throw new Error('No router, please check out for Sheetbase Router.');
     }
     const endpoint: string = options.endpoint || 'data';
