@@ -10,25 +10,27 @@
  * Repo: https://github.com/sheetbase/sheets-nosql-server.git
  */
 
-function load() {
+var DATABASE_ID = "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI";
+
+function load_() {
   return SheetsNosql.sheetsNosql({
-    databaseId: "1Zz5kvlTn2cXd41ZQZlFeCjvVR_XhpUnzKlDGB8QsXoI"
+    databaseId: DATABASE_ID
   });
 }
 function example1() {
-  var DB = load();
+  var DB = load_();
   var object = DB.object("/foo/foo-3");
   Logger.log(object);
 }
 
 function example2() {
-  var DB = load();
+  var DB = load_();
   var list = DB.list("/foo/foo-2/content");
   Logger.log(list);
 }
 
 function example3() {
-  var DB = load();
+  var DB = load_();
   var update = DB.update({
     "/foo/foo-6/content": new Date().getTime()
   });

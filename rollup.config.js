@@ -17,9 +17,5 @@ export default {
     ],
     plugins: [
         resolve()
-    ],
-    external: [
-        'ejs',
-        'handlebars',
     ]
 };

@@ -26,41 +26,46 @@ function routingError(res: RouteResponse, code: string) {
     return res.error(code, message, status);
 }
 
-export function sheetsNosqlModuleRoutes(
+export function moduleRoutes(
     SheetsNosql: SheetsNosqlService,
-    Router: RouterService,
     options: AddonRoutesOptions = {},
 ): void {
+    const { router: Router, disabledRoutes } = SheetsNosql.getOptions();
+
     const endpoint: string = options.endpoint || 'data';
     const middlewares: RouteHandler[] = options.middlewares || ([
         (req, res, next) => next(),
     ]);
 
-    Router.get('/' + endpoint, ... middlewares, (req, res) => {
-        let result: any[] | {[key: string]: any};
-        try {
-            const path: string = req.query.path;
-            const type: string = req.query.type;
-            if (type === 'list') {
-                result = SheetsNosql.list(path);
-            } else {
-                result = SheetsNosql.object(path);
+    if (disabledRoutes.indexOf('get:' + endpoint) < 0) {
+        Router.get('/' + endpoint, ... middlewares, (req, res) => {
+            let result: any[] | {[key: string]: any};
+            try {
+                const path: string = req.query.path;
+                const type: string = req.query.type;
+                if (type === 'list') {
+                    result = SheetsNosql.list(path);
+                } else {
+                    result = SheetsNosql.object(path);
+                }
+            } catch (code) {
+                return routingError(res, code);
             }
-        } catch (code) {
-            return routingError(res, code);
-        }
-        return res.success(result);
-    });
-
-    Router.post('/' + endpoint, ... middlewares, (req, res) => {
-        try {
-            const updates: {[key: string]: any} = req.body.updates;
-            SheetsNosql.update(updates);
-        } catch (code) {
-            return routingError(res, code);
-        }
-        return res.success({
-            updated: true,
+            return res.success(result);
         });
-    });
+    }
+
+    if (disabledRoutes.indexOf('post:' + endpoint) < 0) {
+        Router.post('/' + endpoint, ... middlewares, (req, res) => {
+            try {
+                const updates: {[key: string]: any} = req.body.updates;
+                SheetsNosql.update(updates);
+            } catch (code) {
+                return routingError(res, code);
+            }
+            return res.success({
+                updated: true,
+            });
+        });
+    }
 }

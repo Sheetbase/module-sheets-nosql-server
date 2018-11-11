@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist/esm3",
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist"
   },
   "files": [
     "./src/public_api.ts"

@@ -1,12 +1,15 @@
-import { AddonRoutesOptions, UtilsService } from '@sheetbase/core-server';
+import {
+    AddonRoutesOptions,
+    o2a,
+    a2o,
+    honorData,
+} from '@sheetbase/core-server';
 import { initialize, Table } from '@sheetbase/tamotsux-server';
 import get from 'lodash-es/get';
 import set from 'lodash-es/set';
 
 import { Options } from './types';
-import { sheetsNosqlModuleRoutes } from './routes';
-
-const Utils = new UtilsService();
+import { moduleRoutes } from './routes';
 
 export class SheetsNosqlService {
     private options: Options;
@@ -23,20 +26,23 @@ export class SheetsNosqlService {
         this.options = options;
     }
 
+    getOptions(): Options {
+        return this.options;
+    }
+
     registerRoutes(options?: AddonRoutesOptions): void {
-        sheetsNosqlModuleRoutes(this, this.options.router, options);
+        return moduleRoutes(this, options);
     }
 
     object(path: string) {
         return this.get(path);
     }
-    list(path: string): any[] {
-        const data = this.get(path);
-        return Utils.o2a(data);
-    }
-
     doc(collectionId: string, docId: string) {
         return this.object(`/${collectionId}/${docId}`);
+    }
+    list(path: string): any[] {
+        const data = this.get(path);
+        return o2a(data);
     }
     collection(collectionId: string): any[] {
         return this.list(`/${collectionId}`);
@@ -144,10 +150,10 @@ export class SheetsNosqlService {
                 }
             }
             if (Object.keys(item).length > 0) {
-                items.push(Utils.honorData(item));
+                items.push(honorData(item));
             }
         }
-        return Utils.a2o(items);
+        return a2o(items);
     }
 
 }

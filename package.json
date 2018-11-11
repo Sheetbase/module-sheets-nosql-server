@@ -15,7 +15,7 @@
       "module": "sheetbase-app-scripts build",
       "readme": "sheetbase-app-scripts readme",
       "docs": "sheetbase-app-scripts docs",
-      "build": "npm run module && npm run readme && npm run docs",
+      "build": "npm run module && npm run readme && npm run docs && npm run transpile-test",
       "deploy": "sheetbase-app-scripts deploy",
       "lint": "tslint --project tslint.json && echo 'No lint errors.'",
       "transpile-test": "tsc --project tests/tsconfig.test.json",
@@ -37,9 +37,11 @@
       "url": "https://github.com/sheetbase/sheets-nosql-server/issues"
    },
    "dependencies": {
-      "@sheetbase/core-server": "0.0.11",
       "@sheetbase/tamotsux-server": "0.0.4",
       "lodash-es": "^4.17.11"
+   },
+   "peerDependencies": {
+      "@sheetbase/core-server": "0.0.12"
    },
    "devDependencies": {
       "@sheetbase/app-scripts": "0.0.26",

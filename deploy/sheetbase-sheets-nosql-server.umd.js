@@ -1,152 +1,78 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('handlebars'), require('ejs')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'handlebars', 'ejs'], factory) :
-    (factory((global.SheetsNosql = {}),global.handlebars,global.ejs));
-}(this, (function (exports,handlebars,ejs) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (factory((global.SheetsNosql = {})));
+}(this, (function (exports) { 'use strict';
 
-    var __assign = (undefined && undefined.__assign) || function () {
-        __assign = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                    t[p] = s[p];
+    function o2a(object, keyName) {
+        if (keyName === void 0) { keyName = '$key'; }
+        var array = [];
+        for (var _i = 0, _a = Object.keys(object); _i < _a.length; _i++) {
+            var key = _a[_i];
+            if (object[key] instanceof Object) {
+                object[key][keyName] = key;
             }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
-    var __assign$1 = (undefined && undefined.__assign) || function () {
-        __assign$1 = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                    t[p] = s[p];
+            else {
+                var value = object[key];
+                object[key] = {};
+                object[key][keyName] = key;
+                object[key]['value'] = value;
             }
-            return t;
-        };
-        return __assign$1.apply(this, arguments);
-    };
-
-    var __assign$2 = (undefined && undefined.__assign) || function () {
-        __assign$2 = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                    t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign$2.apply(this, arguments);
-    };
-
-    var UtilsService = /** @class */ (function () {
-        function UtilsService() {
+            array.push(object[key]);
         }
-        UtilsService.prototype.o2a = function (object, keyName) {
-            if (keyName === void 0) { keyName = '$key'; }
-            var array = [];
-            for (var _i = 0, _a = Object.keys(object); _i < _a.length; _i++) {
-                var key = _a[_i];
-                if (object[key] instanceof Object) {
-                    object[key][keyName] = key;
+        return array;
+    }
+    function a2o(array, keyName) {
+        if (keyName === void 0) { keyName = 'key'; }
+        var object = {};
+        for (var i = 0; i < (array || []).length; i++) {
+            var item = array[i];
+            object[item[keyName] ||
+                item['slug'] ||
+                (item['id'] ? '' + item['id'] : null) ||
+                (item['#'] ? '' + item['#'] : null) ||
+                ('' + Math.random() * 1E20)] = item;
+        }
+        return object;
+    }
+    function honorData(data) {
+        if (data === void 0) { data = {}; }
+        for (var key in data) {
+            if (data[key] === '' || data[key] === null || data[key] === undefined) {
+                // delete null key
+                delete data[key];
+            }
+            else if ((data[key] + '').toLowerCase() === 'true') {
+                // boolean TRUE
+                data[key] = true;
+            }
+            else if ((data[key] + '').toLowerCase() === 'false') {
+                // boolean FALSE
+                data[key] = false;
+            }
+            else if (!isNaN(data[key])) {
+                // number
+                if (Number(data[key]) % 1 === 0) {
+                    // tslint:disable-next-line:ban
+                    data[key] = parseInt(data[key], 2);
                 }
-                else {
-                    var value = object[key];
-                    object[key] = {};
-                    object[key][keyName] = key;
-                    object[key]['value'] = value;
-                }
-                array.push(object[key]);
-            }
-            return array;
-        };
-        UtilsService.prototype.a2o = function (array, keyName) {
-            if (keyName === void 0) { keyName = 'key'; }
-            var object = {};
-            for (var i = 0; i < (array || []).length; i++) {
-                var item = array[i];
-                object[item[keyName] ||
-                    item['slug'] ||
-                    (item['id'] ? '' + item['id'] : null) ||
-                    (item['#'] ? '' + item['#'] : null) ||
-                    ('' + Math.random() * 1E20)] = item;
-            }
-            return object;
-        };
-        UtilsService.prototype.uniqueId = function (length, startWith) {
-            if (length === void 0) { length = 12; }
-            if (startWith === void 0) { startWith = '-'; }
-            var maxLoop = length - 8;
-            var ASCII_CHARS = startWith + '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
-            var lastPushTime = 0;
-            var lastRandChars = [];
-            var now = new Date().getTime();
-            var duplicateTime = (now === lastPushTime);
-            lastPushTime = now;
-            var timeStampChars = new Array(8);
-            var i;
-            for (i = 7; i >= 0; i--) {
-                timeStampChars[i] = ASCII_CHARS.charAt(now % 64);
-                now = Math.floor(now / 64);
-            }
-            var uid = timeStampChars.join('');
-            if (!duplicateTime) {
-                for (i = 0; i < maxLoop; i++) {
-                    lastRandChars[i] = Math.floor(Math.random() * 64);
+                if (Number(data[key]) % 1 !== 0) {
+                    // tslint:disable-next-line:ban
+                    data[key] = parseFloat(data[key]);
                 }
             }
             else {
-                for (i = maxLoop - 1; i >= 0 && lastRandChars[i] === 63; i--) {
-                    lastRandChars[i] = 0;
+                // JSON
+                try {
+                    data[key] = JSON.parse(data[key]);
                 }
-                lastRandChars[i]++;
-            }
-            for (i = 0; i < maxLoop; i++) {
-                uid += ASCII_CHARS.charAt(lastRandChars[i]);
-            }
-            return uid;
-        };
-        UtilsService.prototype.honorData = function (data) {
-            if (data === void 0) { data = {}; }
-            for (var key in data) {
-                if (data[key] === '' || data[key] === null || data[key] === undefined) {
-                    // delete null key
-                    delete data[key];
-                }
-                else if ((data[key] + '').toLowerCase() === 'true') {
-                    // boolean TRUE
-                    data[key] = true;
-                }
-                else if ((data[key] + '').toLowerCase() === 'false') {
-                    // boolean FALSE
-                    data[key] = false;
-                }
-                else if (!isNaN(data[key])) {
-                    // number
-                    if (Number(data[key]) % 1 === 0) {
-                        // tslint:disable-next-line:ban
-                        data[key] = parseInt(data[key], 2);
-                    }
-                    if (Number(data[key]) % 1 !== 0) {
-                        // tslint:disable-next-line:ban
-                        data[key] = parseFloat(data[key]);
-                    }
-                }
-                else {
-                    // JSON
-                    try {
-                        data[key] = JSON.parse(data[key]);
-                    }
-                    catch (e) {
-                        // continue
-                    }
+                catch (e) {
+                    // continue
                 }
             }
-            return data;
-        };
-        return UtilsService;
-    }());
+        }
+        return data;
+    }
 
     // tslint:disable:only-arrow-functions forin max-line-length
     /**
@@ -1874,41 +1800,46 @@
         var status = error.status, message = error.message;
         return res.error(code, message, status);
     }
-    function sheetsNosqlModuleRoutes(SheetsNosql, Router, options) {
+    function moduleRoutes(SheetsNosql, options) {
         if (options === void 0) { options = {}; }
+        var _a = SheetsNosql.getOptions(), Router = _a.router, disabledRoutes = _a.disabledRoutes;
         var endpoint = options.endpoint || 'data';
         var middlewares = options.middlewares || ([
             function (req, res, next) { return next(); },
         ]);
-        Router.get.apply(Router, ['/' + endpoint].concat(middlewares, [function (req, res) {
-                var result;
-                try {
-                    var path = req.query.path;
-                    var type = req.query.type;
-                    if (type === 'list') {
-                        result = SheetsNosql.list(path);
+        if (disabledRoutes.indexOf('get:' + endpoint) < 0) {
+            Router.get.apply(Router, ['/' + endpoint].concat(middlewares, [function (req, res) {
+                    var result;
+                    try {
+                        var path = req.query.path;
+                        var type = req.query.type;
+                        if (type === 'list') {
+                            result = SheetsNosql.list(path);
+                        }
+                        else {
+                            result = SheetsNosql.object(path);
+                        }
                     }
-                    else {
-                        result = SheetsNosql.object(path);
+                    catch (code) {
+                        return routingError(res, code);
                     }
-                }
-                catch (code) {
-                    return routingError(res, code);
-                }
-                return res.success(result);
-            }]));
-        Router.post.apply(Router, ['/' + endpoint].concat(middlewares, [function (req, res) {
-                try {
-                    var updates = req.body.updates;
-                    SheetsNosql.update(updates);
-                }
-                catch (code) {
-                    return routingError(res, code);
-                }
-                return res.success({
-                    updated: true
-                });
-            }]));
+                    return res.success(result);
+                }]));
+        }
+        if (disabledRoutes.indexOf('post:' + endpoint) < 0) {
+            Router.post.apply(Router, ['/' + endpoint].concat(middlewares, [function (req, res) {
+                    try {
+                        var updates = req.body.updates;
+                        SheetsNosql.update(updates);
+                    }
+                    catch (code) {
+                        return routingError(res, code);
+                    }
+                    return res.success({
+                        updated: true
+                    });
+                }]));
+        }
     }
 
     var __assign$3 = (undefined && undefined.__assign) || function () {
@@ -1922,7 +1853,6 @@
         };
         return __assign$3.apply(this, arguments);
     };
-    var Utils = new UtilsService();
     var SheetsNosqlService = /** @class */ (function () {
         // TODO: TODO
         // custom modifiers
@@ -1934,18 +1864,21 @@
         function SheetsNosqlService(options) {
             this.options = options;
         }
+        SheetsNosqlService.prototype.getOptions = function () {
+            return this.options;
+        };
         SheetsNosqlService.prototype.registerRoutes = function (options) {
-            sheetsNosqlModuleRoutes(this, this.options.router, options);
+            return moduleRoutes(this, options);
         };
         SheetsNosqlService.prototype.object = function (path) {
             return this.get(path);
         };
-        SheetsNosqlService.prototype.list = function (path) {
-            var data = this.get(path);
-            return Utils.o2a(data);
-        };
         SheetsNosqlService.prototype.doc = function (collectionId, docId) {
             return this.object("/" + collectionId + "/" + docId);
+        };
+        SheetsNosqlService.prototype.list = function (path) {
+            var data = this.get(path);
+            return o2a(data);
         };
         SheetsNosqlService.prototype.collection = function (collectionId) {
             return this.list("/" + collectionId);
@@ -2048,10 +1981,10 @@
                     }
                 }
                 if (Object.keys(item).length > 0) {
-                    items.push(Utils.honorData(item));
+                    items.push(honorData(item));
                 }
             }
-            return Utils.a2o(items);
+            return a2o(items);
         };
         return SheetsNosqlService;
     }());
