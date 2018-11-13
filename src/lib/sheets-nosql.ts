@@ -23,8 +23,10 @@ export class SheetsNosqlService {
     // maybe indexing
 
     constructor(options: Options) {
-        this.options = options;
-        this.options.disabledRoutes = [];
+        this.options = {
+            disabledRoutes: [],
+            ... options,
+        };
     }
 
     getOptions(): Options {
