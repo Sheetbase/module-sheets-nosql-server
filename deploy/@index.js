@@ -3,7 +3,7 @@
  * Name: @sheetbase/sheets-nosql-server
  * Export name: SheetsNosql
  * Description: Using Google Sheets as NoSQL database.
- * Version: 0.0.6
+ * Version: 0.0.7
  * Author: Sheetbase
  * Homepage: https://sheetbase.net
  * License: MIT

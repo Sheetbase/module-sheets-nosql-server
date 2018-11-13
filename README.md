@@ -27,9 +27,9 @@ const SheetsNosql = SheetsNosqlModule.SheetsNosql;
 
 ## Scopes
 
-`https://www.googleapis.com/auth/script.scriptapp
+`https://www.googleapis.com/auth/script.scriptapp`
 
-https://www.googleapis.com/auth/spreadsheets`
+`https://www.googleapis.com/auth/spreadsheets`
 
 ## Usage
 

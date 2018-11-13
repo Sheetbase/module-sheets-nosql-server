@@ -7,7 +7,7 @@
     function o2a(object, keyName) {
         if (keyName === void 0) { keyName = '$key'; }
         var array = [];
-        for (var _i = 0, _a = Object.keys(object); _i < _a.length; _i++) {
+        for (var _i = 0, _a = Object.keys(object || {}); _i < _a.length; _i++) {
             var key = _a[_i];
             if (object[key] instanceof Object) {
                 object[key][keyName] = key;
@@ -1866,6 +1866,7 @@
         // maybe indexing
         function SheetsNosqlService(options) {
             this.options = options;
+            this.options.disabledRoutes = [];
         }
         SheetsNosqlService.prototype.getOptions = function () {
             return this.options;
