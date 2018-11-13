@@ -25,8 +25,7 @@ var SheetsNosqlService = /** @class */ (function () {
     // fix bugs
     // maybe indexing
     function SheetsNosqlService(options) {
-        this.options = options;
-        this.options.disabledRoutes = [];
+        this.options = __assign({ disabledRoutes: [] }, options);
     }
     SheetsNosqlService.prototype.getOptions = function () {
         return this.options;

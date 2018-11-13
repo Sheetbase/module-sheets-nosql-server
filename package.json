@@ -1,6 +1,6 @@
 {
    "name": "@sheetbase/sheets-nosql-server",
-   "version": "0.0.7",
+   "version": "0.0.8",
    "description": "Using Google Sheets as NoSQL database.",
    "author": "Sheetbase",
    "homepage": "https://sheetbase.net",

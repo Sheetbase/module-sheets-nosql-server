@@ -1865,8 +1865,7 @@
         // fix bugs
         // maybe indexing
         function SheetsNosqlService(options) {
-            this.options = options;
-            this.options.disabledRoutes = [];
+            this.options = __assign$3({ disabledRoutes: [] }, options);
         }
         SheetsNosqlService.prototype.getOptions = function () {
             return this.options;
