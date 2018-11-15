@@ -25,12 +25,6 @@ declare const SheetsNosqlModule: { SheetsNosql: any };
 const SheetsNosql = SheetsNosqlModule.SheetsNosql;
 ```
 
-## Scopes
-
-`https://www.googleapis.com/auth/script.scriptapp`
-
-`https://www.googleapis.com/auth/spreadsheets`
-
 ## Usage
 
 - Docs homepage: https://sheetbase.github.io/sheets-nosql-server
