@@ -1,3 +1,7 @@
+# ⛔️ DEPRECATED
+
+Please use: [https://github.com/sheetbase/sheets-server](https://github.com/sheetbase/sheets-server).
+
 # Sheetbase Module: @sheetbase/sheets-nosql-server
 
 Using Google Sheets as NoSQL database.
